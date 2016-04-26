@@ -1,22 +1,22 @@
 import java.util.Iterator;
-public class SortedList<T> extends LinkedList<T>
+public class SortedList<T extends PlanarShape> extends LinkedList<T>
 {	
 	public LinkedList<T> listInOrder(LinkedList<T> list) 
 	{
-		Iterator iterate;
-		SortedList<T> sortedList = new SortedList();
-		T smallest,next;
+		Iterator<T> iterate;
+		SortedList<T> sortedList = new SortedList<T>();
+		T smallest; T next;
 		// while there are elements in list
 		while(list.size()!=0)
 		{
 			iterate = list.iterator();
 			// take first element as the smallest element we have encountered so far
-			smallest=(T) iterate.next();
+			smallest= iterate.next();
 			// for all other elements, search for smallest element
 			while(iterate.hasNext())
 			{
-				next =(T) iterate.next();
-				if(comesBefore((PlanarShape) next,(PlanarShape) smallest)) // if next comes before smallest
+				next = iterate.next();
+				if(comesBefore(next, smallest)) // if next comes before smallest
 				{
 					smallest = next;
 				}
@@ -27,7 +27,7 @@ public class SortedList<T> extends LinkedList<T>
 			iterate = list.iterator(); 	// reset to beginning to list
 			while(iterate.hasNext())	// while there are things to iterate over
 			{
-				T removeNext = (T) iterate.next();	// store next element
+				T removeNext = iterate.next();	// store next element
 				if(removeNext.equals(smallest))		// if the next element is what we want to remove
 				{
 					iterate.remove();				// remove it

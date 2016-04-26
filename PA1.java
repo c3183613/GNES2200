@@ -36,7 +36,7 @@ public class PA1
 			System.out.println(o.toString());
 		}
 		System.out.println("SORTED");
-		SortedList<PlanarShape> sortedList = new SortedList();
+		SortedList<PlanarShape> sortedList = new SortedList<PlanarShape>();
 		sortedList =(SortedList<PlanarShape>) sortedList.listInOrder(myList);
 		Iterator sortedIt = sortedList.iterator();
 		while(sortedIt.hasNext())

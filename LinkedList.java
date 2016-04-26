@@ -4,19 +4,19 @@ import java.util.NoSuchElementException;
 
 public class LinkedList<T> implements Iterable<T>
 {
-	private Node<T> sentNode;
+	private Node sentNode;
 	protected int modCount;
 	// single sentinel node 
 	LinkedList()
 	{
-		sentNode = new Node<T>();
+		sentNode = new Node();
 		sentNode.setNext(sentNode);
 		sentNode.setPrev(sentNode);
 	}
 	LinkedList(T args)
 	{
-		sentNode = new Node<T>();
-		Node<T> newNode = new Node<T>(args);
+		sentNode = new Node();
+		Node newNode = new Node(args);
 		sentNode.setNext(newNode);
 		sentNode.setPrev(newNode);
 		newNode.setPrev(sentNode);
@@ -27,7 +27,7 @@ public class LinkedList<T> implements Iterable<T>
 	// prepend
 	public void prepend(T args)
 	{
-		Node<T> newNode = new Node<T>(args);
+		Node newNode = new Node(args);
 		if(sentNode.getNext().equals(sentNode))
 		{
 			sentNode.setNext(newNode);
@@ -48,7 +48,7 @@ public class LinkedList<T> implements Iterable<T>
 	// append
 	public void append(T args)
 	{
-		Node<T> newNode = new Node<T>(args);
+		Node newNode = new Node(args);
 		if(sentNode.getNext().equals(sentNode))
 		{
 			sentNode.setNext(newNode);
@@ -68,10 +68,10 @@ public class LinkedList<T> implements Iterable<T>
 
 	// take items from the head
 	// size >= 1
-	public Node<T> removeHead()
+	public Node removeHead()
 	{
 		// assert(!sentNode.getNext().equals(sentNode));
-		Node<T> tempNode;
+		Node tempNode;
 		if(sentNode.getNext().getNext().equals(sentNode))
 		{
 			tempNode = sentNode.getNext();
@@ -102,7 +102,7 @@ public class LinkedList<T> implements Iterable<T>
 
 	public String toString()
 	{
-		Iterator iterate = iterator();
+		Iterator<T> iterate = iterator();
 		String s="";
 		while(iterate.hasNext())
 		{
@@ -111,17 +111,17 @@ public class LinkedList<T> implements Iterable<T>
 		return s;
 	}
 
-	public ListIterator<T> iterator()
+	public ListIterator iterator()
 	{
-		return new ListIterator<T>(sentNode);
+		return new ListIterator(sentNode);
 	}
 
-	private class ListIterator<T> implements Iterator<T>
+	private class ListIterator implements Iterator<T>
 	{
-		private Node<T> iteratorNode;
+		private Node iteratorNode;
 		private int expectedModCount;
 
-		ListIterator(Node<T> head)
+		ListIterator(Node head)
 		{
 			iteratorNode = head;
 			expectedModCount = modCount;
@@ -148,7 +148,7 @@ public class LinkedList<T> implements Iterable<T>
 
 		public void remove()
 		{
-			Node<T> tempNode;
+			Node tempNode;
 			modCount++;
 			if(modCount != ++expectedModCount)
 				throw new ConcurrentModificationException("Cannot mutate in context of iterator");
@@ -160,10 +160,10 @@ public class LinkedList<T> implements Iterable<T>
 
 	}
 
-	private class Node<T>
+	private class Node
 	{
 		private T data;
-		private Node<T> next, prev;
+		private Node next, prev;
 
 		public Node()
 		{
@@ -182,12 +182,12 @@ public class LinkedList<T> implements Iterable<T>
 			data = newData;
 		}
 
-		public void setNext(Node<T> newNext)
+		public void setNext(Node newNext)
 		{
 			next = newNext;
 		}
 
-		public void setPrev(Node<T> newPrev)
+		public void setPrev(Node newPrev)
 		{
 			prev = newPrev;
 		}
@@ -197,12 +197,12 @@ public class LinkedList<T> implements Iterable<T>
 			return data;
 		}
 
-		public Node<T> getNext()
+		public Node getNext()
 		{
 			return next;
 		}
 
-		public Node<T> getPrev()
+		public Node getPrev()
 		{
 			return prev;
 		}
