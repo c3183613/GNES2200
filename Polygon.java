@@ -102,4 +102,9 @@ public class Polygon extends PlanarShape
 		}
 		return a;
 	}
+
+	public double originDistance()
+	{
+		return closestPointToOrigin().distance();
+	}
 }
