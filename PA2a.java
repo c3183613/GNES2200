@@ -1,7 +1,7 @@
 import java.util.Scanner;
 import java.util.Iterator;
 
-public class PA1
+public class PA2a
 {
 	public static void main(String[] args)
 	{
