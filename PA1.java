@@ -7,35 +7,21 @@ public class PA1
 	{
 		LinkedList<PlanarShape> myList = new LinkedList<PlanarShape>();
 		// Delimits on P as P denotes a new Polygon
-		Scanner in = new Scanner(System.in).useDelimiter("\\s*P\\s*");
+		Scanner in = new Scanner(System.in);
 		while(in.hasNext())
 		{
-			// Store the String in variable to be used
-			Scanner line = new Scanner(in.next());
-			// Create a Polygon to be used, use next int as array size
-			PlanarShape tempPoly = new Polygon(line.nextInt()+1);
-			// variable used to keep track of which index of array to modify
-			int i =0;
-			// while there are inputs to take
-			while(line.hasNextDouble())
-			{
-				tempPoly.modifyArray(i, new Point(line.nextDouble(), line.nextDouble()));
-				// System.out.println(line);
-				i++;
-			}
-			// Deep copy the first point of the polygon as the last
-			tempPoly.modifyArray(i, new Point(tempPoly.getArray()[0].getX(), tempPoly.getArray()[0].getY()));
-			// add Polygon into linked list as a new node
-			myList.append(tempPoly);
+			myList.append(PlanarShape.shapeFactory(in));
 		}
 		// print original list
+		System.out.println("Original list");
 		Iterator iterate = myList.iterator();
 		while(iterate.hasNext())
 		{
 			PlanarShape o =(PlanarShape) iterate.next();
 			System.out.println(o.toString());
 		}
-		System.out.println("SORTED");
+		System.out.println();
+		System.out.println("Sorted list");
 		SortedList<PlanarShape> sortedList = new SortedList<PlanarShape>();
 		sortedList =(SortedList<PlanarShape>) sortedList.listInOrder(myList);
 		Iterator sortedIt = sortedList.iterator();
