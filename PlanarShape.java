@@ -51,38 +51,40 @@ public abstract class PlanarShape implements Comparable<PlanarShape>
 					Returns true if: this Polygon's area is less than o's area
 					Returns false otherwise
 	*/
-	public static boolean compareTo(PlanarShape shape1, PlanarShape shape2)
+
+	// -1 if this comes before shape2, 0 if both equal, 1 if shape2 comes before this
+	public int compareTo(PlanarShape shape2)
 	{
 		// If shape2 and this Polygon are considered equal by area
 		// Check which Polygon has the point closest to the origin
-		if(shape1.equals(shape2))
+		if(this.equals(shape2))
 		{
 			// if shape2's closest point to origin is bigger than this Polygon's 
 			// closest point to origin, return true
-			if(shape1.originDistance() < shape2.originDistance())
-			{
-				return true;
+			if(this.originDistance() < shape2.originDistance())
+			{ // if comesBefore, true
+				return -1;
 			}
 			// if the distance is the same, return true
-			else if(shape1.originDistance() == shape2.originDistance())
+			else if(this.originDistance() == shape2.originDistance())
 			{
-				return true;
+				return 0;
 			}
 			else
 			{
 				// otherwise, return false
-				return false;
+				return 1;
 			}
 		}
 		else
 		{
 			// if shape2 has a bigger area, it comes after this
 			// hence this Polygon comes before, return true
-			if(shape2.area() > shape1.area())
-				return true;
+			if(shape2.area() > this.area())
+				return -1;
 			// othwise, this Polygon's area is bigger, return false
 			else
-				return false;
+				return 1;
 		}
 	}
 }

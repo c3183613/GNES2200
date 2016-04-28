@@ -16,7 +16,7 @@ public class SortedList<T extends PlanarShape> extends LinkedList<T>
 			while(iterate.hasNext())
 			{
 				next = iterate.next();
-				if(PlanarShape.compareTo(next, smallest)) // if next comes before smallest
+				if(next.compareTo(smallest) == -1) // if next comes before smallest
 				{
 					smallest = next;
 				}
