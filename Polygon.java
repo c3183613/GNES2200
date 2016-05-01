@@ -33,7 +33,7 @@ public class Polygon extends PlanarShape
 		{
 			s+= arrayPoint[i].toString()+", ";
 		}
-		s+=": " + String.format("%5.2f", area()) + "]";
+		s+="]: " + String.format("%5.2f", area());
 		// [(point0), .... , pointn]:area
 		return s;
 	}	

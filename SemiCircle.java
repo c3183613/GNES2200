@@ -30,7 +30,7 @@ public class SemiCircle extends PlanarShape
 	{
 		// SEMI=[point 0 point 1 ]: area_value
 		String s = "SEMI=[";
-		s+=pointArray[0].toString()+" "+pointArray[1].toString() +"]: "+String.format("%5.2f", area());
+		s+=pointArray[0].toString()+", "+pointArray[1].toString() +"]: "+String.format("%5.2f", area());
 		return s;
 	}
 
