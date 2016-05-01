@@ -12,14 +12,37 @@ public abstract class PlanarShape implements Comparable<PlanarShape>
 
 	public abstract Point[] getArray();
 
+	public boolean equals(PlanarShape comparee)
+	{
+		if(area()*0.9995 <= comparee.area() && comparee.area() <= area()*1.0005)
+			return true;
+		else if(comparee.area()*0.9995 <= area() && area() <= comparee.area()*1.0005)
+			return true;
+		else
+			return false;
+	}
+
 	public static PlanarShape shapeFactory(Scanner scan)
 	{
 		String shapeType = scan.next();
 		PlanarShape newShape = null; // if not = null, error, variable newShape might not have been initialized
 		switch(shapeType)
 		{
+			case "S":
+			{
+				newShape = new SemiCircle(new Point(scan.nextDouble(), scan.nextDouble()), new Point(scan.nextDouble(), scan.nextDouble()));
+				break;
+			}
+
+			case "C":
+			{
+				newShape = new Circle(new Point(scan.nextDouble(), scan.nextDouble()), scan.nextDouble());
+				break;
+			}
+
 			case "P":
 			{
+				// System.out.println("next int: "+ scan.nextInt());
 				newShape = new Polygon(scan.nextInt()+1);
 							// variable used to keep track of which index of array to modify
 				int i =0;

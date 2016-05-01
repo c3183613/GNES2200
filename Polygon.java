@@ -78,15 +78,15 @@ public class Polygon extends PlanarShape
 					this Polygon is within 0.05% of comparee's area, they are considered equal 
 					and return true, otherwise return false
 	*/
-	public boolean equals(Polygon comparee)
-	{
-		if(area()*0.9995 <= comparee.area() && comparee.area() <= area()*1.0005)
-			return true;
-		else if(comparee.area()*0.9995 <= area() && area() <= comparee.area()*1.0005)
-			return true;
-		else
-			return false;
-	}
+	// public boolean equals(Polygon comparee)
+	// {
+	// 	if(area()*0.9995 <= comparee.area() && comparee.area() <= area()*1.0005)
+	// 		return true;
+	// 	else if(comparee.area()*0.9995 <= area() && area() <= comparee.area()*1.0005)
+	// 		return true;
+	// 	else
+	// 		return false;
+	// }
 
 	/*
 		Preconditions: Polygon initialized

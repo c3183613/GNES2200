@@ -11,18 +11,30 @@ public class Circle extends PlanarShape
 
 	public double area()
 	{
-		return (Math.PI * radius) * (Math.Pi * radius);
+		return Math.PI * Math.pow((radius),2);
 	}
 
 	public String toString()
 	{
 		String s="CIRC=[";
-		s+= circCentre.toString + " "+radius+"]:"+area();
+		s+= circCentre.toString() + " "+radius+"]:"+String.format("%5.2f", area());
 		return s;
 	}
 
 	public double originDistance()
 	{
-		return (circCentre.distance()-radius);
+		return Math.abs(circCentre.distance()-radius);
+	}
+
+	@Override
+	public void modifyArray(int index, Point point)
+	{
+		throw new UnsupportedOperationException("This feature is not supported in this class");
+	}
+
+	@Override
+	public Point[] getArray()
+	{
+		throw new UnsupportedOperationException("This feature is not supported in this class");
 	}
 }

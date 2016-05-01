@@ -21,8 +21,8 @@ public class LinkedList<T> implements Iterable<T>
 		sentNode.setPrev(newNode);
 		newNode.setPrev(sentNode);
 		newNode.setNext(sentNode);
-		modCount++;
-	}
+		modCount++
+;	}
 
 	// prepend
 	public void prepend(T args)

@@ -1,5 +1,5 @@
 import java.util.Iterator;
-public class SortedList<T extends PlanarShape> extends LinkedList<T>
+public class SortedList<T extends Comparable<T>> extends LinkedList<T>
 {	
 	public LinkedList<T> listInOrder(LinkedList<T> list) 
 	{

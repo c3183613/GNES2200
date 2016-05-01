@@ -11,6 +11,7 @@ public class PA2b
 		while(in.hasNext())
 		{
 			myList.append(PlanarShape.shapeFactory(in));
+			// System.out.println(in.next());
 		}
 		// print original list
 		System.out.println("Original list");
