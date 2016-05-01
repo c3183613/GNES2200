@@ -103,6 +103,10 @@ public class Polygon extends PlanarShape
 		return a;
 	}
 
+	/*
+		Precondition: Polygon initialized
+		Postcondition: returns Point of Polygon that is closest to origin
+	*/
 	public double originDistance()
 	{
 		return closestPointToOrigin().distance();

@@ -1,7 +1,7 @@
 /*
 	Created by: Jeremy Law
 	Student number: c3183613
-
+	Point class
 */
 public class Point
 {
@@ -22,14 +22,18 @@ public class Point
 		y = b;
 	}
 
-	// returns this point as a string in the format (XXXX.XX, YYYY.YY)
+	// Precondition:	returns String representation of a Point
+	// Postcondition: 	returns this point as a string in the format (XXXX.XX, YYYY.YY)
 	public String toString()
 	{
 		String string = "(" + String.format("%4.2f", x) +"," + String.format("%4.2f", y) + ")";
 		return string;
 	}
 
-	// returns the distance from origin to this Point
+	/*
+	 Precondition: Point initialized
+	 Postcondition: returns the distance from origin to this Point
+	 */
 	public double distance()
 	{
 		// use pythag's theorem? 

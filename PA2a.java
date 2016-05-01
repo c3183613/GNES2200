@@ -1,3 +1,8 @@
+/*
+	Jeremy Law
+	c3183613
+	Main class for part a of PA2
+*/
 import java.util.Scanner;
 import java.util.Iterator;
 
@@ -14,14 +19,19 @@ public class PA2a
 		}
 		// print original list
 		System.out.println("Original list");
-		Iterator iterate = myList.iterator();
+		// Iterator of type PlanarShape
+		Iterator<PlanarShape> iterate = myList.iterator();
+		// iterate over each element in container
 		while(iterate.hasNext())
 		{
-			PlanarShape o =(PlanarShape) iterate.next();
+			// store element for use
+			PlanarShape o = iterate.next();
+			// print String representation of o
 			System.out.println(o.toString());
 		}
 		System.out.println();
 		System.out.println("Sorted list");
+		// same but with SortedList
 		SortedList<PlanarShape> sortedList = new SortedList<PlanarShape>();
 		sortedList =(SortedList<PlanarShape>) sortedList.listInOrder(myList);
 		Iterator sortedIt = sortedList.iterator();

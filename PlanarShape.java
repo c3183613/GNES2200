@@ -1,7 +1,12 @@
+/*
+	Jeremy Law
+	c3183613
+	PlanarShape (abstract class)
+*/
 import java.util.Scanner;
-
 public abstract class PlanarShape implements Comparable<PlanarShape>
 {
+	// abstract methods
 	public abstract String toString();
 
 	public abstract double area();
@@ -12,6 +17,12 @@ public abstract class PlanarShape implements Comparable<PlanarShape>
 
 	public abstract Point[] getArray();
 
+	/*
+		Precondition: Object that is a PlanarShape is initialized
+		Postcondition: If 'this' or 'comparee' are within 0.05% of each other
+						they are considered equal, and will return true.
+						Else, return false.
+	*/
 	public boolean equals(PlanarShape comparee)
 	{
 		if(area()*0.9995 <= comparee.area() && comparee.area() <= area()*1.0005)
@@ -22,6 +33,11 @@ public abstract class PlanarShape implements Comparable<PlanarShape>
 			return false;
 	}
 
+	/*
+		Preconditions: None
+		Postcondition: 	Create a PlanarShape and return the relevant PlanarShape
+						depending on what is passed in scan
+	*/
 	public static PlanarShape shapeFactory(Scanner scan)
 	{
 		String shapeType = scan.next();
@@ -70,12 +86,10 @@ public abstract class PlanarShape implements Comparable<PlanarShape>
 	}
 
 	/*
-	Preconditions:
-	Postconditions: If this Polygon comes before 'o', return true. Else, return false
-					Returns true if: areas are 'equal' and this Polygon's closest Point to
-					the origin is smaller or equal to o's closest Point
-					Returns true if: this Polygon's area is less than o's area
-					Returns false otherwise
+	Preconditions:	PlanarShape is initialized and shape2 of type PlanarShape
+	Postconditions: If this PlanarShape 'comes before' shape2, return -1.
+					If this PlanarShape is equal to shape, return 0
+					If this PlanarShape 'comes after' shape2, return 1
 	*/
 
 	// -1 if this comes before shape2, 0 if both equal, 1 if shape2 comes before this

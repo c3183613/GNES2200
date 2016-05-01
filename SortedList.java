@@ -1,6 +1,15 @@
+/*
+	Jeremy Law
+	c3183613
+	SortedList class
+*/
 import java.util.Iterator;
 public class SortedList<T extends Comparable<T>> extends LinkedList<T>
-{	
+{
+	/*
+		Precondition: SortedList is initialized 
+		Postcondition: Returns a SortedList<T> list of elements in sorted order but parameter ends up empty
+	*/
 	public LinkedList<T> listInOrder(LinkedList<T> list) 
 	{
 		Iterator<T> iterate;

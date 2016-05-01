@@ -1,18 +1,30 @@
+/*
+	Jeremy Law
+	c3183613
+	LinkedList class
+	private inner Node class
+	private inner Iterator class for Linked List
+*/
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public class LinkedList<T> implements Iterable<T>
 {
+	// sentinel node
 	private Node sentNode;
-	protected int modCount;
-	// single sentinel node 
+	// modification count for Iterator
+	protected int modCount;	// each time LinkedList is modified, modCount is incremented
+
+	// Constructor for empty LinkedList class
 	LinkedList()
 	{
 		sentNode = new Node();
 		sentNode.setNext(sentNode);
 		sentNode.setPrev(sentNode);
 	}
+
+	// Constructor to instantiate with one item
 	LinkedList(T args)
 	{
 		sentNode = new Node();
@@ -24,10 +36,14 @@ public class LinkedList<T> implements Iterable<T>
 		modCount++
 ;	}
 
-	// prepend
+	/*
+		Precondition: LinkedList instantiated
+		Postcondition: put args at front of linked list
+	*/
 	public void prepend(T args)
 	{
 		Node newNode = new Node(args);
+		// if there are no elements in the linked list
 		if(sentNode.getNext().equals(sentNode))
 		{
 			sentNode.setNext(newNode);
@@ -35,6 +51,7 @@ public class LinkedList<T> implements Iterable<T>
 			newNode.setPrev(sentNode);
 			newNode.setNext(sentNode);
 		}
+		// at least one element in the linked list
 		else
 		{
 			newNode.setNext(sentNode.getNext());
@@ -42,13 +59,18 @@ public class LinkedList<T> implements Iterable<T>
 			newNode.getNext().setPrev(newNode);
 			sentNode.setNext(newNode);
 		}
+		// increment mod count
 		modCount++;
 	}
 
-	// append
+	/*
+		Precondition: LinkedList instantiated
+		Postcondition: Add to the end of the list
+	*/
 	public void append(T args)
 	{
 		Node newNode = new Node(args);
+		// if no elements other than sentinel node
 		if(sentNode.getNext().equals(sentNode))
 		{
 			sentNode.setNext(newNode);
@@ -56,6 +78,7 @@ public class LinkedList<T> implements Iterable<T>
 			newNode.setPrev(sentNode);
 			newNode.setNext(sentNode);	
 		}
+		// at least one element
 		else
 		{
 			newNode.setPrev(sentNode.getPrev());
@@ -63,15 +86,19 @@ public class LinkedList<T> implements Iterable<T>
 			newNode.getPrev().setNext(newNode);
 			sentNode.setPrev(newNode);
 		}
+		// increment mod counter
 		modCount++;
 	}
 
-	// take items from the head
-	// size >= 1
+	/*
+		Precondition: LinkedList instantiated and at least 1 element in the list
+		Postcondition: Remove element at the head of the list
+	*/
 	public Node removeHead()
 	{
-		// assert(!sentNode.getNext().equals(sentNode));
 		Node tempNode;
+		// if else statement to control pointers depending on how many elements in the list
+		// if only one element in the list, sentinel node points back to itself after element removal
 		if(sentNode.getNext().getNext().equals(sentNode))
 		{
 			tempNode = sentNode.getNext();
@@ -88,6 +115,10 @@ public class LinkedList<T> implements Iterable<T>
 		return tempNode;
 	}
 
+	/*
+		Precondition: LinkedList instantiated 
+		Postcondition: Returns how many elements in list (not including sentinel node)
+	*/
 	public int size()
 	{
 		int i=0;
@@ -100,33 +131,38 @@ public class LinkedList<T> implements Iterable<T>
 		return i;
 	}
 
-	public String toString()
-	{
-		Iterator<T> iterate = iterator();
-		String s="";
-		while(iterate.hasNext())
-		{
-			s+=iterate.next().toString();
-		}
-		return s;
-	}
-
+	/*
+		Precondition: LinkedList instantiated
+		Postcondition: return iterator of type ListIterator
+	*/
 	public ListIterator iterator()
 	{
 		return new ListIterator(sentNode);
 	}
 
+	/*
+		Private inner class, iterator for LinkedList of type T
+	*/
 	private class ListIterator implements Iterator<T>
 	{
 		private Node iteratorNode;
 		private int expectedModCount;
 
+		/*
+			Precondition: LinkedList has a sentinel node before first element in list
+			Postcondition: ListIterator initialized
+		*/
 		ListIterator(Node head)
 		{
 			iteratorNode = head;
 			expectedModCount = modCount;
 		}
 
+		/*
+			Precondition: ListIterator initialized
+			Postcondition: returns true if iteratorNode points to another element that is not sentNode
+							returns false otherwise
+		*/
 		public boolean hasNext()
 		{
 			if(iteratorNode.getNext().equals(sentNode))
@@ -135,7 +171,12 @@ public class LinkedList<T> implements Iterable<T>
 				return true;
 		}
 
-		// Returns the data within the next node
+		/*
+			Precondition: ListIterator has been initialized, hasNext has returned true
+			Postcondition: 	If LinkedList has been modified independent to the iterator, throw ConcurrentModificationException
+							If hasNext() would return false immediately before this function is called, throw NoSuchElementException
+							If no Exceptions thrown, return data in next element (of type T)
+		*/
 		public T next()
 		{
 			if(modCount != expectedModCount)
@@ -146,6 +187,11 @@ public class LinkedList<T> implements Iterable<T>
 			return iteratorNode.getData();
 		}
 
+		/*
+			Precondition:	ListIterator has been initialized, LinkedList has not been modified independently of the Iterator
+			Postcondition: 	If LinkedList has been modified independent of the Iterator, throw ConcurrentModificationException
+							if no exception thrown, remove element most recently visited and set pointers appropriately
+		*/
 		public void remove()
 		{
 			Node tempNode;
@@ -160,23 +206,36 @@ public class LinkedList<T> implements Iterable<T>
 
 	}
 
+	/*
+		Private inner Node class that holds type T
+	*/
 	private class Node
 	{
+		// private member variables
 		private T data;
 		private Node next, prev;
 
+		/*
+			Precondition: none
+			Postcondition: Node instantiated with no data. Member variables set to null
+		*/
 		public Node()
 		{
 			data = null;
 			prev = null;
 			next = null;
 		}
+
+		/*
+			Precondition: none
+			Postcondition: Node instantiated with newData
+		*/
 		public Node(T newData)
 		{
 			data = newData;
 			prev = next = null;
 		}
-		// Mutator methods
+		// Mutator methods (self explanatory)
 		public void setData(T newData)
 		{
 			data = newData;
@@ -191,7 +250,7 @@ public class LinkedList<T> implements Iterable<T>
 		{
 			prev = newPrev;
 		}
-		// Query methods
+		// Query methods (self explanatory)
 		public T getData()
 		{
 			return data;
