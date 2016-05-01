@@ -43,7 +43,10 @@ public abstract class PlanarShape implements Comparable<PlanarShape>
 			case "P":
 			{
 				// System.out.println("next int: "+ scan.nextInt());
-				newShape = new Polygon(scan.nextInt()+1);
+				int temp = scan.nextInt();
+				if(temp == 0)
+					throw new UnsupportedOperationException("This feature is not supported in this class");
+				newShape = new Polygon(temp+1);
 							// variable used to keep track of which index of array to modify
 				int i =0;
 				// while there are inputs to take
